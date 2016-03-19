@@ -28,3 +28,5 @@ node_modules
 
 # Removed config.json file
 config.json
+
+.idea

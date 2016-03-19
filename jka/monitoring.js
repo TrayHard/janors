@@ -139,7 +139,7 @@ MonitoringFunc.prototype._parseString = function(response){ //parsing
 '\n        **Режим:**                   '+types[Cvars.gametype]+"\n"+
 '\n:white_check_mark: **Онлайн ('+2+'/'+Cvars.maxclients+')**'
     }
-    bot.sendMessage(msg.channel, output);
+    this.bot.sendMessage(msg.channel, output);
     this._closeSocket();
 };
 
