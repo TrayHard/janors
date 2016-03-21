@@ -5,6 +5,7 @@
   "main": "gravebot.js",
   "dependencies": {
     "cleverbot.io": "^1.0.4",
+    "columnify": "^1.5.4",
     "discord.js": "^5.1.0",
     "gizoogle": "^0.0.6",
     "imgflipper": "^1.0.1",

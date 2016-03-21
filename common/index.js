@@ -6,6 +6,7 @@ var Info =
     Members: require('./info/members.js'),
     WhoIs: require('./info/whois.js'),
     ServInfo: require('./info/serverinfo.js'),
+    Test: require('./info/test.js'),
     Time: require('./info/time.js')
 }
 var Fun =
