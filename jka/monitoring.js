@@ -2,10 +2,13 @@
  * Created by Илья on 17.03.2016.
  */
 'use strict'
-var columnify = require('columnify');
-var iconv = require('iconv-lite');
+const columnify = require('columnify');
+//const waterfall = require("async/waterfall");
+var Stopwatch = require('timer-stopwatch');
+const iconv = require('iconv-lite');
 const dgram = require('dgram');
-const socket = dgram.createSocket('udp4');
+
+//const socket = dgram.createSocket('udp4');
 const request = new Buffer ('\xff\xff\xff\xff\x02getstatus', 'ascii');
 
 function MonitoringFunc (bot, msg, suffix) {
@@ -13,52 +16,52 @@ function MonitoringFunc (bot, msg, suffix) {
     this.bot = bot;
     this.msg = msg;
     this.correct = true;
-    if (!suffix) {    //standard server
-        this.ip = "37.230.210.134";
-        this.port = 29071;
-        this.desc = "RussianPublic Server"
-        this.loc = ":ru:";
-    } else if (suffix.toLowerCase() === "wc") {
-        this.ip = "185.117.155.181";
-        this.port = 29070;
-        this.desc = "Winter's Curse Server"
-        this.loc = ":ru:";
-    } else if (suffix.toLowerCase() === "ds") {
-        this.ip = "94.142.139.242";
-        this.port = 29070;
-        this.desc = "DarkSide Arena"
-        this.loc = ":ru:";
-    } else if (suffix.toLowerCase() === "pb") {
-        this.ip = "37.230.210.134";
-        this.port = 29071;
-        this.desc = "RussianPublic Server"
-        this.loc = ":ru:";
-    } else if (suffix.toLowerCase() === "loli") {
-        this.ip = "46.228.195.123";
-        this.port = 29000;
-        this.desc = "Lolipop ESL Server"
-        this.loc = ":de:";
-    } else if (suffix.toLowerCase() === "rjkc") {
-        this.ip = "jk.extrajka.ru";
-        this.port = 29070;
-        this.desc = "RJKC Duel Server"
-        this.loc = ":fr:";
-    } else if (suffix.toLowerCase() === "help") {
+    if ((!suffix)||(suffix.toLowerCase() === "help")) {    //standard server
         var help = "Доступные варианты:\n" +
-            "\n**\`!jamon\`** или **\`!jamon pb\`** - Russian Public Server" +
-            "\n**\`!jamon ds\`** - DarkSide Arena"+
-            "\n**\`!jamon wc\`** - Winter's Curse" +
-            "\n**\`!jamon loli\`** - Lolipop ESL" +
-            "\n**\`!jamon rjkc\`** - RUJKC Duel Server #1";
+            "\n**\`!mon pb\`** - Russian Public Server" +
+            "\n**\`!mon ds\`** - DarkSide Arena"+
+            "\n**\`!mon wc\`** - Winter's Curse" +
+            "\n**\`!mon loli\`** - Lolipop ESL" +
+            "\n**\`!mon rjkc\`** - RUJKC Duel Server #1";
         this.bot.sendMessage(this.msg.channel, help);
         this.correct = false;
+    } else if (/(wc|с)/.test(suffix.toLowerCase())) {
+        this.ip = "185.117.155.181";
+        this.port = 29070;
+        this.desc = "Winter's Curse Server";
+        this.loc = ":ru:";
+    } else if (/(te|еst)/.test(suffix.toLowerCase())) {
+        this.ip = "51.254.103.59";
+        this.port = 29070;
+        this.desc = "Test None Server";
+        this.loc = ":no_entry_sign:";
+    } else if (/(ds)/.test(suffix.toLowerCase())) {
+        this.ip = "94.142.139.242";
+        this.port = 29070;
+        this.desc = "DarkSide Arena";
+        this.loc = ":ru:";
+    } else if (/(p|рb)/.test(suffix.toLowerCase())) {
+        this.ip = "37.230.210.134";
+        this.port = 29071;
+        this.desc = "RussianPublic Server";
+        this.loc = ":ru:";
+    } else if (/(lo|оli)/.test(suffix.toLowerCase())) {
+        this.ip = "46.228.195.123";
+        this.port = 29000;
+        this.desc = "Lolipop ESL Server";
+        this.loc = ":de:";
+    } else if (/(rjkc|с)/.test(suffix.toLowerCase())) {
+        this.ip = "jk.extrajka.ru";
+        this.port = 29070;
+        this.desc = "RJKC Duel Server";
+        this.loc = ":fr:";
     } else {
         var help = "Неверный ввод! Доступные варианты:\n" +
-            "\n**\`!jamon\`** или **\`!jamon pb\`** - Russian Public Server" +
-            "\n**\`!jamon ds\`** - DarkSide Arena"+
-            "\n**\`!jamon wc\`** - Winter's Curse" +
-            "\n**\`!jamon loli\`** - Lolipop ESL" +
-            "\n**\`!jamon rjkc\`** - RUJKC Duel Server #1";
+            "\n**\`!mon pb\`** - Russian Public Server" +
+            "\n**\`!mon ds\`** - DarkSide Arena"+
+            "\n**\`!mon wc\`** - Winter's Curse" +
+            "\n**\`!mon loli\`** - Lolipop ESL" +
+            "\n**\`!mon rjkc\`** - RUJKC Duel Server #1";
         this.bot.sendMessage(this.msg.channel, help);
         this.correct = false;
     }
@@ -66,6 +69,7 @@ function MonitoringFunc (bot, msg, suffix) {
 
 MonitoringFunc.prototype.getServerStatus = function(){
     if (!this.correct) return;
+    this.correct = false;
     var ip = this.ip;
     var port = this.port;
     var desc = this.desc;
@@ -80,7 +84,10 @@ MonitoringFunc.prototype.getServerStatus = function(){
         self._parseString(iconv.decode(msg, 'win1251'));
     });
     socket.send(request, 0, request.length, port, ip);
-}
+    setTimeout(function(){
+        self._closeSocket();
+    }, 3000)
+};
 
 MonitoringFunc.prototype._parseString = function(response){ //parsing
     var loc = this.loc;
@@ -136,7 +143,7 @@ MonitoringFunc.prototype._parseString = function(response){ //parsing
     var lockness = ":unlock:";
     if (Cvars.g_needpass[1]==1) lockness = ":lock:";
     var map;
-    if (maps[Cvars.mapname])
+    if (maps[Cvars.mapname])  //:no_entry_sign:
     {
         map = maps[Cvars.mapname];
     } else map = Cvars.mapname;
@@ -168,17 +175,18 @@ MonitoringFunc.prototype._parseString = function(response){ //parsing
             showHeaders: false,
             config: {
                 0: {minWidth: 30},
-                1: {minWidth: 5},
+                1: {minWidth: 5}
             }
         });
         //console.log(playerTable);
         output = output + "\`\`\`" + playerTable + "\`\`\`";
     }
     this.bot.sendMessage(this.msg.channel, output);
-    this._closeSocket();
+    this.correct = true;
 };
 
 MonitoringFunc.prototype._closeSocket = function(){ // closing socket
+    if (!this.correct) this.bot.sendMessage(this.msg.channel, "Сервер не отвечает!");
     console.log("Closing the socket");
     this.socket.close();
 };

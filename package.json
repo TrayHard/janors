@@ -4,6 +4,7 @@
   "description": "Бот для чат программы Discord",
   "main": "gravebot.js",
   "dependencies": {
+    "async": "^2.0.0-rc.1",
     "cleverbot.io": "^1.0.4",
     "columnify": "^1.5.4",
     "discord.js": "^5.1.0",

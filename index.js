@@ -7,6 +7,7 @@ var multiline = require("multiline");
 var qs = require("querystring");
 
 var bot = new Discord.Client();
+var lastCmdTimestamp;
 
 bot.on("ready", function() {
 	console.log("Started successfully. Serving in " + bot.servers.length + " servers");
@@ -29,7 +30,8 @@ bot.on("message", function(msg) {
 			console.log("Command: " + command);
 			console.log("Suffix: " + suffix);
 			var cmd = commands[command];
-			if (cmd) {
+			if( ( (Date.now() - lastCmdTimestamp) / 1000 ) > 5 ){
+				lastCmdTimestamp = Date.now();
 				cmd(bot, msg, suffix);
 			}
 		}
@@ -119,14 +121,13 @@ var commands = {
 	"нахуй": Common.Fun.Emotes.nahui,
 	"никого": Common.Fun.Emotes.nikogo,
 	"деточка": Common.Fun.Emotes.detochka,
-
     /*=======================================================================================================*/
 	/*===================================== ПОЛЕЗНОЕ ========================================================*/
 	/*=======================================================================================================*/
 	"youtube": Common.Useful.YouTube,
 	"словарь": Common.Useful.Slovar,
 	"вики": Common.Useful.Wikipedia,
-	"jamon": JKA.Info.Monitoring
+	"mon": JKA.Info.Monitoring
 	/*=======================================================================================================*/
 	/*====================================== ЗАБАВЫ =========================================================*/
 	/*=======================================================================================================*/
