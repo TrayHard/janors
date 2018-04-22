@@ -10,13 +10,13 @@ var bot = new Discord.Client();
 var lastCmdTimestamp;
 
 bot.on("ready", function() {
-	console.log("Started successfully. Serving in " + bot.servers.length + " servers");
+	console.log("Started successfully. Serving in " + bot.guilds.array().length + " servers");
 });
 
 bot.on("disconnected", function() {
 	console.log(currentTime() + "Disconnected. Attempting to reconnect...");
 	sleep(5000);
-	bot.login(Config.email, Config.password);
+	bot.login(Config.token);
 });
 
 bot.on("message", function(msg) {
