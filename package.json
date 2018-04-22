@@ -7,7 +7,7 @@
     "async": "^2.0.0-rc.1",
     "cleverbot.io": "^1.0.4",
     "columnify": "^1.5.4",
-    "discord.js": "^5.1.0",
+    "discord.js": "^5.3.2",
     "gizoogle": "^0.0.6",
     "imgflipper": "^1.0.1",
     "multiline": "^1.0.2",

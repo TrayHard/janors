@@ -177,4 +177,4 @@ var Drama = [
 
 
 
-bot.login(Config.email, Config.password);
+bot.login(Config.token);
