@@ -5,18 +5,19 @@
 var multiline = require("multiline");
 
 function Help (bot, msg, suffix) {
+    console.log("HELP IS HERE")
     if (suffix === "инфо") {
-        bot.sendMessage(msg.channel, helpinfo);
+        msg.channel.sendMessage("test");
     } else if (suffix === "полезное") {
-        bot.sendMessage(msg.channel, helpuseful);
+        msg.channel.sendMessage(helpuseful);
     } else if (suffix === "забавы") {
-        bot.sendMessage(msg.channel, helpfun);
+        msg.channel.sendMessage(helpfun);
     } else if (suffix === "игры") {
-        bot.sendMessage(msg.channel, helpgames);
+        msg.channel.sendMessage(helpgames);
     } else if (suffix === "эмоции") {
-        bot.sendMessage(msg.channel, helpemotes);
+        msg.channel.sendMessage(helpemotes);
     } else {
-        bot.sendMessage(msg.channel, help);
+        msg.channel.sendMessage(help);
     }
 }
 

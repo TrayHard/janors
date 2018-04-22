@@ -19,20 +19,32 @@ bot.on("disconnected", function() {
 	bot.login(Config.token);
 });
 
-bot.on("message", function(msg) {
+function print(msg){
+	console.log(msg);
+}
+// bot.on("message", msg => {
+// 	if (msg.content === 'ping') {
+// 		msg.channel.sendMessage('pong');
+// 	}
+// });
+
+bot.on("message", msg => {
 	//Checks if the message is a command
 	//   /^Jan[\s(.+)]/
 	if (Config.prefix == '!') {
 		if (msg.content[0] === Config.prefix) {
 			var command = msg.content.toLowerCase().split(" ")[0].substring(1);
 			var suffix = msg.content.toLowerCase().substring(command.length + 2);
-			console.log("Message: \"" + msg.content + "\"");
-			console.log("Command: " + command);
-			console.log("Suffix: " + suffix);
+			print("Message: \"" + msg.content + "\"");
+			print("Command: " + command);
+			print("Suffix: " + suffix);
 			var cmd = commands[command];
+			print(cmd)
+			cmd(bot, msg, suffix);
 			if( ( (Date.now() - lastCmdTimestamp) / 1000 ) > 5 ){
 				lastCmdTimestamp = Date.now();
-				cmd(bot, msg, suffix);
+				print(lastCmdTimestamp)
+				
 			}
 		}
 	} else {
@@ -44,18 +56,19 @@ bot.on("message", function(msg) {
 				var args = msg.content.toLowerCase().split(" ");
 				var command = args[1];
 				var suffix = msg.content.toLowerCase().slice(name.length + command.length + 2);
-				console.log("Message: \"" + msg.content + "\"");
-				console.log("Command: " + command);
-				console.log("Suffix: " + suffix);
+				print("Message: \"" + msg.content + "\"");
+				print("Command: " + command);
+				print("Suffix: " + suffix);
 				var cmd = commands[command];
 				if (cmd) {
-					console.log(cmd);
+					print(cmd);
 					cmd(bot, msg, suffix);
 				} else Common.Info.Help(bot, msg, suffix);
 			}
 		}
 	}
 });
+
 //
 var Common = require('./common');
 var JKA = require('./jka');
@@ -144,37 +157,5 @@ var commands = {
 
 
 };
-
-/*
-var Drama = [
-  "http://i.imgur.com/IwJnS7s.png",
-	"http://i.imgur.com/2QBVNEy.png",
-	"http://i.imgur.com/Vflx6FT.png",
-	"http://i.imgur.com/GbIaoT0.png",
-	"http://i.imgur.com/H3NmH9A.png",
-	"http://i.imgur.com/mF0tsPR.png",
-	"http://i.imgur.com/lSsR6sD.png",
-	"http://i.imgur.com/PSi8gtA.png",
-	"http://i.imgur.com/iMJOWmk.png",
-	"http://i.imgur.com/tx0RTpO.png",
-	"http://i.imgur.com/7qQ1WXA.png",
-	"http://i.imgur.com/373kW4w.png",
-	"http://i.imgur.com/hIFLJlG.png",
-	"http://i.imgur.com/80bF923.png",
-	"http://i.imgur.com/0nBAsqC.png",
-	"http://i.imgur.com/KKVHZTt.png",
-	"http://i.imgur.com/DdnIFi2.png",
-	"http://i.imgur.com/OX2r7f3.png",
-	"http://i.imgur.com/NdyVfGj.png",
-	"http://i.imgur.com/5eJXar4.png",
-	"http://i.imgur.com/qP9Mbm2.png",
-	"http://i.imgur.com/E6Fkk97.png",
-	"http://i.imgur.com/BIJdWtz.png",
-	"http://i.imgur.com/rRAKiSv.png",
-	"http://i.imgur.com/lj1UGpj.png",
-	"http://i.imgur.com/jqr2gUM.png"
-];*/
-
-
 
 bot.login(Config.token);

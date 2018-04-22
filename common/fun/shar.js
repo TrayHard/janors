@@ -4,11 +4,11 @@
 'use strict'
 function Shar(bot, msg, suffix) {
     if (suffix.length === 0) {
-        bot.sendMessage(msg.channel, msg.author + " Мм? Че такое?\n");
-        bot.sendFile(msg.channel, "./images/shar.jpg")
+        msg.channel.sendMessage(msg.author + " Мм? Че такое?\n");
+        msg.channel.sendFile("./images/shar.jpg")
     } else {
         var rand = Math.floor(Math.random() * EightBall.length);
-        bot.sendMessage(msg.channel, msg.author + ":crystal_ball:**" + EightBall[rand] + "**:crystal_ball:");
+        msg.channel.sendMessage(msg.author + ":crystal_ball:**" + EightBall[rand] + "**:crystal_ball:");
     }
 }
 
