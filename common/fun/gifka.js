@@ -26,7 +26,7 @@ function get_gif(tags, func) {
         "format": "json",
         "limit": 1
     };
-    var query = qs.stringify(params);
+    var query = JSON.stringify(params);
     if (tags !== null) {
         query += "&q=" + tags.join('+')
     }
