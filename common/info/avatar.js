@@ -5,9 +5,9 @@
 function Avatar(bot, msg, suffix) {
     if (msg.mentions.length === 0) {
         if (msg.author.avatarURL === null) {
-            bot.sendMessage(msg.channel, "Не обманывай меня, нет у тебя никакого аватара!");
+            msg.channel.sendMessage("Не обманывай меня, нет у тебя никакого аватара!");
         } else {
-            bot.sendMessage(msg.channel, "Держи:\n" + msg.author.avatarURL);
+            msg.channel.sendMessage("Держи:\n" + msg.author.avatarURL);
         }
         return;
     }
@@ -19,7 +19,7 @@ function Avatar(bot, msg, suffix) {
             msgArray.push("Аватар "+ user.username + ":\n" + user.avatarURL);
         }
     }
-    bot.sendMessage(msg.channel, msgArray);
+    msg.channel.sendMessage(msgArray);
 }
 /*===============================================================================*/
 /*===============================================================================*/

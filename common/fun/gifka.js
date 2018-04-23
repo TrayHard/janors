@@ -5,15 +5,15 @@
 function gifka(bot, msg, suffix) {
     var query = suffix;
     if (!query) {
-        bot.sendMessage(msg.channel, "Используй: **`!гифка`** `категория`");
+        msg.channel.sendMessage("Используй: **`!гифка`** `категория`");
         return;
     }
     var tags = suffix.split(" ");
     get_gif(tags, function(id) {
         if (typeof id !== "undefined") {
-            bot.sendMessage(msg.channel, "http://media.giphy.com/media/" + id + "/giphy.gif");
+            msg.channel.sendMessage("http://media.giphy.com/media/" + id + "/giphy.gif");
         } else {
-            bot.sendMessage(msg.channel, "Я не могу найти гифку из категории: " + tags);
+            msg.channel.sendMessage("Я не могу найти гифку из категории: " + tags);
         }
     });
 }

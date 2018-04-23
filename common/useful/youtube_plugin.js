@@ -10,9 +10,9 @@ function YoutubePlugin () {
 YoutubePlugin.prototype.respond = function (query, channel, bot) {
 	this.youtube.search(query, 1, function(error, result) {
 				if (!result || !result.items || result.items.length < 1) {
-					bot.sendMessage(channel, "I couldn't find a video for: " + query);
+					msg.channel.sendMessage("I couldn't find a video for: " + query);
 				} else {
-					bot.sendMessage(channel, "http://www.youtube.com/watch?v=" + result.items[0].id.videoId );
+					msg.channel.sendMessage("http://www.youtube.com/watch?v=" + result.items[0].id.videoId );
 				}
 		});
 };

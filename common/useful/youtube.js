@@ -10,7 +10,7 @@ if (Config.prefix == '!'){
 function YouTube(bot, msg, suffix) {
     var query = suffix;
     if (!query) {
-        bot.sendMessage(msg.channel, "Используй: **`"+prefix+"youtube`** `категория или название видео`");
+        msg.channel.sendMessage("Используй: **`"+prefix+"youtube`** `категория или название видео`");
         return;
     }
     var yt = require("./youtube_plugin");

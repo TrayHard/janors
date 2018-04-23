@@ -5,9 +5,9 @@
 function Monetka (bot, msg) {
     var number = Math.floor(Math.random() * 2) + 1;
     if (number === 1) {
-        bot.sendFile(msg.channel, "./images/orel.png");
+        msg.channel.sendFile("./images/orel.png");
     } else {
-        bot.sendFile(msg.channel, "./images/reshka.png");
+        msg.channel.sendFile("./images/reshka.png");
     }
 }
 /*===============================================================================*/

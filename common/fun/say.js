@@ -9,12 +9,12 @@ if (Config.prefix == '!'){
 function Say(bot, msg, suffix) {
     var query = suffix;
     if (!query) {
-        bot.sendMessage(msg.channel, "Используй: **`"+prefix+"скажи`** `пример`");
+        msg.channel.sendMessage("Используй: **`"+prefix+"скажи`** `пример`");
         return;
     }
     var G = require('gizoogle');
     G.string(suffix, function(error, translation) {
-        bot.sendMessage(msg.channel, translation);
+        msg.channel.sendMessage(translation);
     });
 }
 /*===============================================================================*/

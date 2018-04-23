@@ -10,7 +10,7 @@ if (Config.prefix == '!'){
 function Slovar(bot, msg, suffix) {
     var query = suffix;
     if (!query) {
-        bot.sendMessage(msg.channel, "Используй: **`"+prefix+"словарь`** `искомый термин`");
+        msg.channel.sendMessage("Используй: **`"+prefix+"словарь`** `искомый термин`");
         return;
     }
     var Urban = require('urban');
@@ -19,9 +19,9 @@ function Slovar(bot, msg, suffix) {
             var definition = "" + json.word + ": " + json.definition +
                 "\n:arrow_up: " + json.thumbs_up + "   :arrow_down: " + json.thumbs_down +
                 "\n\nExample: " + json.example;
-            bot.sendMessage(msg.channel, definition);
+            msg.channel.sendMessage(definition);
         } else {
-            bot.sendMessage(msg.channel, "Я не могу найти: " + suffix);
+            msg.channel.sendMessage("Я не могу найти: " + suffix);
         }
     });
 }

@@ -18,7 +18,7 @@ function ServInfo(bot, msg) {
     "ID Сервера: " + serverID + "\nРасположен в Германии\nВладелец, конечно же, Tray!" +
     "\nГруппа ВК: http://vk.com/rujka" + "\nНаш YouTube: http://www.youtube.com/extrajka" +
     "\nTwitch: http://twitch.tv/rujka1\n```");
-    bot.sendMessage(msg, serverinfo);
+    msg.channel.sendMessage(serverinfo);
 }
 /*===============================================================================*/
 /*===============================================================================*/

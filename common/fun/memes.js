@@ -10,24 +10,24 @@ if (Config.prefix == '!'){
 
 function MemeHelp(bot, msg, suffix) {
     if (suffix === "1") {
-        bot.sendMessage(msg.author, memelist.list1);
+        msg.channel.sendMessage(memelist.list1);
     } else if (suffix === "2") {
-        bot.sendMessage(msg.author, memelist.list2);
+        msg.channel.sendMessage(memelist.list2);
     } else if (suffix === "3") {
-        bot.sendMessage(msg.author, memelist.list3);
+        msg.channel.sendMessage(memelist.list3);
     } else if (suffix === "список") {
-        bot.sendMessage(msg.author, memelist.list1);
-        bot.sendMessage(msg.author, memelist.list2);
-        bot.sendMessage(msg.author, memelist.list3);
+        msg.channel.sendMessage(memelist.list1);
+        msg.channel.sendMessage(memelist.list2);
+        msg.channel.sendMessage(memelist.list3);
     } else {
-        bot.sendMessage(msg.channel, memelist.all);
+        msg.channel.sendMessage(msg.channel, memelist.all);
     }
 }
 
 function MemeCreate(bot, msg, suffix) {
     var query = suffix;
     if (!query) {
-        bot.sendMessage(msg.channel, 'Используй: **`'+prefix+'мем`** `название мема` `"верхний текст"` `"нижний текст"`');
+        msg.channel.sendMessage('Используй: **`'+prefix+'мем`** `название мема` `"верхний текст"` `"нижний текст"`');
         return;
     }
     var tags = query.split('"');
@@ -39,9 +39,9 @@ function MemeCreate(bot, msg, suffix) {
     var imgflipper = new Imgflipper(Config.imgflip_username, Config.imgflip_password);
     imgflipper.generateMeme(meme[memetype], tags[1] ? tags[1] : "", tags[3] ? tags[3] : "", function(err, image) {
         if (err) {
-            bot.sendMessage(msg.channel, 'Используй: **`'+prefix+'мем`** `название мема` `"верхний текст"` `"нижний текст"`');
+            msg.channel.sendMessage('Используй: **`'+prefix+'мем`** `название мема` `"верхний текст"` `"нижний текст"`');
         } else {
-            bot.sendMessage(msg.channel, image);
+            msg.channel.sendMessage(image);
         }
     });
 };

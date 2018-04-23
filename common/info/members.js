@@ -11,7 +11,7 @@ function Members(bot, msg) {
         online = server.members.reduce((count, member) => count + (member.status === 'online' ? 1 : 0), 0);
         serversList += online + " в сети)\n`**";
     }
-    bot.sendMessage(msg.channel, serversList);
+    msg.channel.sendMessage(serversList);
 }
 /*===============================================================================*/
 /*===============================================================================*/

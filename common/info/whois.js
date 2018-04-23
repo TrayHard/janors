@@ -10,7 +10,7 @@ function WhoIs(bot, msg, suffix) {
         var status = msg.author.status;
         var avatar = msg.author.avatarURL;
         var userinfo = ("```Имя: " + username + "\nID: " + userID + "\nДискриминатор: " + discriminator + "\nСтатус: " + status + "\nАватар: " + avatar + "```");
-        bot.sendMessage(msg, userinfo);
+        msg.channel.sendMessage(userinfo);
     } else {
         for (var user of msg.mentions)
             if (user != null) {
@@ -21,7 +21,7 @@ function WhoIs(bot, msg, suffix) {
                 var status = user.status;
                 var avatar = user.avatarURL;
                 var userinfo = ("```Имя: " + username + "\nID: " + userID + "\nДискриминатор: " + discriminator + "\nСтатус: " + status + "\nАватар: " + avatar + "```");
-                bot.sendMessage(msg, userinfo);
+                msg.channel.sendMessage(userinfo);
             }
     }
 }

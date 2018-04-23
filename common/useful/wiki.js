@@ -10,7 +10,7 @@ if (Config.prefix == '!'){
 function Wikipedia(bot, msg, suffix) {
     var query = suffix;
     if (!query) {
-        bot.sendMessage(msg.channel, "Используй: **`"+prefix+"вики`** `что-то о чем хочешь увидеть информацию`");
+        msg.channel.sendMessage("Используй: **`"+prefix+"вики`** `что-то о чем хочешь увидеть информацию`");
         return;
     }
     var Wiki = require('wikijs');
@@ -21,7 +21,7 @@ function Wikipedia(bot, msg, suffix) {
                 var continuation = function() {
                     var paragraph = sumText.shift();
                     if (paragraph) {
-                        bot.sendMessage(msg.channel, paragraph, continuation);
+                        msg.channel.sendMessage(paragraph, continuation);
                     }
                 };
                 continuation();
