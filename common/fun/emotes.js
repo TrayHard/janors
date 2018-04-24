@@ -1,220 +1,37 @@
-/**
+00/**
  * Created by Илья on 16.03.2016.
  */
 'use strict'
 
-function rofl(bot, msg) {
-    msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-    msg.channel.sendMessage(msg.author.username+": ");
-    msg.channel.sendFile(msg.channel, "./images/rofl.png");
+function emotes(bot, msg, suffix) {
+        console.log("suffix: " + suffix)
+    if(suffix!="")
+    {
+        msg.reply("Неверный ввод! \nВведите `!emotes` чтобы просмотреть список доступных эмоций!")
+        return;
+    }
+    msg.channel.sendMessage("<@"+msg.author.id+">: ");
+    var emote = msg.content.substring(1);
+    eval(Emotes[emote]);
+    msg.delete();
 }
 
-function kappa(bot, msg) {
-    msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-    msg.channel.sendMessage(msg.channel, author.username+": ");
-    msg.channel.sendFile(msg.channel, "./images/Kappa.png");
+var Emotes = {
+        "rofl": "msg.channel.sendFile(\"./images/rofl.png\");",
+        "kappa": "msg.channel.sendFile( \"./images/Kappa.png\");",
+        "feelsgood": "msg.channel.sendFile( \"./images/Feelsgoodman.png\");",
+        "dcp": "msg.channel.sendFile( \"./images/dcp.png\");",
+        "karlik": "msg.channel.sendFile( \"./images/karlik.png\");",
+        "slojna": "msg.channel.sendMessage(author.username+\": http://www.youtube.com/watch?v=9HNi47ameLI\");",
+        "wtf": "msg.channel.sendMessage(author.username+\": https://giphy.com/gifs/lrpC7EPBderkY\");",
+        "traygasm": "msg.channel.sendMessage(author.username+\": https://giphy.com/gifs/booty-had-me-like-xB1RqLGoBNh3W\");",
+        "fuckoff": "msg.channel.sendMessage(author.username+\": https://giphy.com/gifs/drinking-shirtless-fuck-off-uVUoBe9nzS2Wc\");",
+        "svali": "msg.channel.sendMessage(author.username+\": https://giphy.com/gifs/leave-seinfeld-go-away-q6dbqenBKNrgY\");",
+        "spat": "msg.channel.sendMessage(author.username+\": https://giphy.com/gifs/AZ9E5rrNWsacg\");",
+        "detochka": "msg.channel.sendMessage(author.username+\": https://youtu.be/6PwHFIhQ8Zo\");"
 }
 
-function feelsgood(bot, msg) {
-    var author = msg.channel.messages[msg.channel.messages.length-1].author;
-    msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-    bmsg.channelot.sendMessage(msg.channel, author.username+": ");
-    msg.channel.sendFile(msg.channel, "./images/Feelsgoodman.png");
-}
-
-function dcp(bot, msg) {
-    var author = msg.channel.messages[msg.channel.messages.length-1].author;
-    msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-    msg.channel.sendMessage(msg.channel, author.username+": ");
-    msg.channel.sendFile(msg.channel, "./images/dcp.png");
-}
-
-function karlik(bot, msg) {
-    var author = msg.channel.messages[msg.channel.messages.length-1].author;
-    msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-    msg.channel.sendMessage(msg.channel, author.username+": ");
-    msg.channel.sendFile(msg.channel, "./images/karlik.png");
-}
-
-function slojna(bot, msg) {
-    var author = msg.channel.messages[msg.channel.messages.length-1].author;
-    msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-    msg.channel.sendMessage(msg.channel, author.username+": http://www.youtube.com/watch?v=9HNi47ameLI");
-}
-
-function pardon(bot, msg) {
-    var author = msg.channel.messages[msg.channel.messages.length-1].author;
-    msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-    msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/07/hey_buddy193a3.gif");
-}
-
-function ehidstvo(bot, msg) {
-   
-        bot.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        bot.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/07/hihia5bd8.gif");
-}
-
-function illuminati(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/07/illuminatif83bd.gif");
-}
-
-function rage(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/07/MOLNII23962.gif");
-}
-
-function explosion(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/07/blowupf65a9.gif");
-}
-
-function holms(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/03/smileb998f.gif");
-}
-
-function obidka(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/03/obida1ef72.gif");
-}
-
-function flirt(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/07/podmignula64ef3.gif");
-}
-
-function disrespect(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/03/disrespecte690a.gif");
-}
-
-function moriarti(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/03/oua1a13.gif");
-}
-
-function arrr(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/03/rrrc7372.gif");
-}
-
-function wtf(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": https://giphy.com/gifs/lrpC7EPBderkY");
-}
-
-function traygasm(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": https://giphy.com/gifs/booty-had-me-like-xB1RqLGoBNh3W");
-}
-
-function fuckoff(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": https://giphy.com/gifs/drinking-shirtless-fuck-off-uVUoBe9nzS2Wc");
-}
-
-function mdaa(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/04/pfff8796c.gif");
-}
-
-function svali(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": https://giphy.com/gifs/leave-seinfeld-go-away-q6dbqenBKNrgY");
-}
-
-function spat(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": https://giphy.com/gifs/AZ9E5rrNWsacg");
-}
-
-function podmigni(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/04/MIGNIaa122.gif");
-}
-
-function chpok(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/07/chpok9e0fe.gif");
-}
-
-function orgy(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/07/gruppovukhad4ad3.gif");
-}
-
-function niceJoke(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/04/noteylf28b1.gif");
-}
-
-function nahui(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/04/IGM8395f.gif");
-}
-
-function nikogo(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": http://hipics.ru/images/2016/03/04/PEREKATI-POLE09b99.gif");
-}
-
-function detochka(bot, msg) {
-   
-        msg.channel.deleteMessage(msg.channel.messages[msg.channel.messages.length-1]);
-        msg.channel.sendMessage(msg.channel, author.username+": https://youtu.be/6PwHFIhQ8Zo");
-}
 /*===============================================================================*/
 /*===============================================================================*/
 /*===============================================================================*/
-exports.rofl = rofl;
-exports.kappa = kappa;
-exports.feelsgood = feelsgood;
-exports.dcp = dcp;
-exports.karlik = karlik;
-exports.slojna = slojna;
-exports.pardon = pardon;
-exports.ehidstvo = ehidstvo;
-exports.illuminati = illuminati;
-exports.rage = rage;
-exports.explosion = explosion;
-exports.holms = holms;
-exports.obidka = obidka;
-exports.flirt = flirt;
-exports.disrespect = disrespect;
-exports.moriarti = moriarti;
-exports.arrr = arrr;
-exports.wtf = wtf;
-exports.traygasm = traygasm;
-exports.fuckoff = fuckoff;
-exports.mdaa = mdaa;
-exports.svali = svali;
-exports.spat = spat;
-exports.podmigni = podmigni;
-exports.chpok = chpok;
-exports.orgy = orgy;
-exports.niceJoke = niceJoke;
-exports.nahui = nahui;
-exports.nikogo = nikogo;
-exports.detochka = detochka;
+module.exports = emotes;

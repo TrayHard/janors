@@ -9,6 +9,8 @@ var qs = require("querystring");
 var bot = new Discord.Client();
 var lastCmdTimestamp;
 
+var isDebug = false;
+
 bot.on("ready", function() {
 	console.log("Started successfully. Serving in " + bot.guilds.array().length + " servers");
 });
@@ -22,11 +24,6 @@ bot.on("disconnected", function() {
 function print(msg){
 	console.log(msg);
 }
-// bot.on("message", msg => {
-// 	if (msg.content === 'ping') {
-// 		msg.channel.sendMessage('pong');
-// 	}
-// });
 
 bot.on("message", msg => {
 	//Checks if the message is a command
@@ -35,16 +32,27 @@ bot.on("message", msg => {
 		if (msg.content[0] === Config.prefix) {
 			var command = msg.content.toLowerCase().split(" ")[0].substring(1);
 			var suffix = msg.content.toLowerCase().substring(command.length + 2);
-			print("Message: \"" + msg.content + "\"");
-			print("Command: " + command);
-			print("Suffix: " + suffix);
+			if(isDebug)
+			{
+				print("Message: \"" + msg.content + "\"");
+				print("Command: " + command);
+				print("Suffix: " + suffix);
+			}
 			var cmd = commands[command];
-			print(cmd)
+			if(isDebug)
+			{
+				print(cmd);
+			}
+			if(cmd === undefined)
+			{
+				print("Wrong cmd: "+command)
+				msg.channel.sendMessage("Такой команды нет! Используйте `"+Config.prefix+"help`!")
+				return;
+			}
 			cmd(bot, msg, suffix);
 			if( ( (Date.now() - lastCmdTimestamp) / 1000 ) > 5 ){
 				lastCmdTimestamp = Date.now();
 				print(lastCmdTimestamp)
-				
 			}
 		}
 	} else {
@@ -102,38 +110,18 @@ var commands = {
 	"мемы": Common.Fun.Meme.MemeHelp,
 	"гифка":  Common.Fun.Gifka,
 	/*====================================== ЭМОЦИИ =========================================================*/
-	"rofl": Common.Fun.Emotes.rofl,
-	"kappa": Common.Fun.Emotes.kappa,
-	"лягуха": Common.Fun.Emotes.feelsgood,
-	"dcp": Common.Fun.Emotes.dcp,
-	"карлик": Common.Fun.Emotes.karlik,
-	"сложна": Common.Fun.Emotes.slojna,
-	"пардон": Common.Fun.Emotes.pardon,
-	"ехидство": Common.Fun.Emotes.ehidstvo,
-	"il": Common.Fun.Emotes.illuminati,
-	"rage": Common.Fun.Emotes.rage,
-	"blowup": Common.Fun.Emotes.explosion,
-	"хы": Common.Fun.Emotes.holms,
-	"обидка": Common.Fun.Emotes.obidka,
-	"флирт": Common.Fun.Emotes.flirt,
-	"неуважение": Common.Fun.Emotes.disrespect,
-	"оу": Common.Fun.Emotes.moriarti,
-	"арр": Common.Fun.Emotes.arrr,
-	"wtf": Common.Fun.Emotes.wtf,
-	"traygasm": Common.Fun.Emotes.traygasm,
-	"fuckoff": Common.Fun.Emotes.fuckoff,
-	"мдаа": Common.Fun.Emotes.mdaa,
-	"свали": Common.Fun.Emotes.svali,
-	"свалинахуй": Common.Fun.Emotes.svali,
-	"спать": Common.Fun.Emotes.spat,
-	"подмигни": Common.Fun.Emotes.flirt,
-	"ривз": Common.Fun.Emotes.podmigni,
-	"чпок": Common.Fun.Emotes.chpok,
-	"оргия": Common.Fun.Emotes.orgy,
-	"найсшутка": Common.Fun.Emotes.niceJoke,
-	"нахуй": Common.Fun.Emotes.nahui,
-	"никого": Common.Fun.Emotes.nikogo,
-	"деточка": Common.Fun.Emotes.detochka,
+	"rofl": Common.Fun.Emotes,
+	"kappa": Common.Fun.Emotes,
+	"feelsgood": Common.Fun.Emotes,
+	"dcp": Common.Fun.Emotes,
+	"карлик": Common.Fun.Emotes,
+	"сложна": Common.Fun.Emotes,
+	"wtf": Common.Fun.Emotes,
+	"traygasm": Common.Fun.Emotes,
+	"fuckoff": Common.Fun.Emotes,
+	"свали": Common.Fun.Emotes,
+	"спать": Common.Fun.Emotes,
+	"деточка": Common.Fun.Emotes,
     /*=======================================================================================================*/
 	/*===================================== ПОЛЕЗНОЕ ========================================================*/
 	/*=======================================================================================================*/

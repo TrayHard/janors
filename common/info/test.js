@@ -3,8 +3,8 @@
  */
 'use strict'
 
-function Test(bot, msg) {
-    console.log("TESTETSETSTETSTETSTE");
+function Test(bot, msg, suffix) {
+    msg.channel.send("<:homo:438316317985079299>")
     //bot.sendMessage(msg.channel, " ");
 }
 /*===============================================================================*/
