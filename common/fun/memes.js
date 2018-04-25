@@ -11,24 +11,30 @@ if (Config.prefix == '!'){
 
 function MemeHelp(bot, msg, suffix) {
     if (suffix === "1") {
-        msg.channel.sendMessage(memelist.list1);
+        msg.author.send(memelist.list1);
+        msg.delete();
     } else if (suffix === "2") {
-        msg.channel.sendMessage(memelist.list2);
+        msg.author.send(memelist.list2);
+        msg.delete();
     } else if (suffix === "3") {
-        msg.channel.sendMessage(memelist.list3);
+        msg.author.send(memelist.list3);
+        msg.delete();
     } else if (suffix === "список") {
-        msg.channel.sendMessage(memelist.list1);
-        msg.channel.sendMessage(memelist.list2);
-        msg.channel.sendMessage(memelist.list3);
+        msg.author.send(memelist.list1);
+        msg.author.send(memelist.list2);
+        msg.author.send(memelist.list3);
+        msg.delete();
     } else {
-        msg.channel.sendMessage(msg.channel, memelist.all);
+        msg.author.send(memelist.all);
+        msg.delete();
     }
 }
 
 function MemeCreate(bot, msg, suffix) {
     var query = suffix;
     if (!query) {
-        msg.channel.sendMessage('Используй: **`'+prefix+'мем`** `название мема` `"верхний текст"` `"нижний текст"`');
+        msg.author.send('Используй: **`'+prefix+'мем`** `название мема` `"верхний текст"` `"нижний текст"`');
+        msg.delete();
         return;
     }
     var tags = query.split('"');
@@ -40,9 +46,11 @@ function MemeCreate(bot, msg, suffix) {
     var imgflipper = new Imgflipper(Config.imgflip_username, Config.imgflip_password);
     imgflipper.generateMeme(meme[memetype], tags[1] ? tags[1] : "", tags[3] ? tags[3] : "", function(err, image) {
         if (err) {
-            msg.channel.sendMessage('Используй: **`'+prefix+'мем`** `название мема` `"верхний текст"` `"нижний текст"`');
+            msg.author.send('Используй: **`'+prefix+'мем`** `название мема` `"верхний текст"` `"нижний текст"`');
+            msg.delete();
         } else {
-            msg.channel.sendMessage(image);
+            msg.channel.send("<@"+msg.author.id+">:\n"+image);
+            msg.delete();
         }
     });
 };
