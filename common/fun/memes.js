@@ -1,7 +1,8 @@
-/**
+/*
  * Created by Илья on 08.03.2016.
  */
 'use strict'
+
 var multiline = require("multiline");
 var Config = require('../../config.json');
 if (Config.prefix == '!'){

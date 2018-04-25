@@ -4,7 +4,7 @@
 'use strict'
 
 function Test(bot, msg, suffix) {
-    msg.channel.send("<:homo:438316317985079299>")
+    msg.author.sendFile("./images/rofl.png");
     //bot.sendMessage(msg.channel, " ");
 }
 /*===============================================================================*/

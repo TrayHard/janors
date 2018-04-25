@@ -21,11 +21,13 @@ bot.on("disconnected", function() {
 	bot.login(Config.token);
 });
 
-function print(msg){
+function print(msg)
+{
 	console.log(msg);
 }
 
 bot.on("message", msg => {
+	if(msg.author.bot) return;
 	//Checks if the message is a command
 	//   /^Jan[\s(.+)]/
 	if (Config.prefix == '!') {
@@ -77,10 +79,8 @@ bot.on("message", msg => {
 	}
 });
 
-//
 var Common = require('./common');
 var JKA = require('./jka');
-
 var commands = {
 	/*=======================================================================================================*/
 	/*======================================= INFO ==========================================================*/
@@ -114,14 +114,15 @@ var commands = {
 	"kappa": Common.Fun.Emotes,
 	"feelsgood": Common.Fun.Emotes,
 	"dcp": Common.Fun.Emotes,
-	"карлик": Common.Fun.Emotes,
-	"сложна": Common.Fun.Emotes,
+	"karlik": Common.Fun.Emotes,
+	"slojna": Common.Fun.Emotes,
 	"wtf": Common.Fun.Emotes,
 	"traygasm": Common.Fun.Emotes,
 	"fuckoff": Common.Fun.Emotes,
-	"свали": Common.Fun.Emotes,
-	"спать": Common.Fun.Emotes,
-	"деточка": Common.Fun.Emotes,
+	"wasted": Common.Fun.Emotes,
+	"spat": Common.Fun.Emotes,
+	"jadnost": Common.Fun.Emotes,
+	"emotes": Common.Fun.Emotes,
     /*=======================================================================================================*/
 	/*===================================== ПОЛЕЗНОЕ ========================================================*/
 	/*=======================================================================================================*/
@@ -142,8 +143,6 @@ var commands = {
 	/*======================================= ИГРЫ ==========================================================*/
 	/*=======================================================================================================*/
 	// В РАЗРАБОТКЕ
-
-
 };
 
 bot.login(Config.token);
