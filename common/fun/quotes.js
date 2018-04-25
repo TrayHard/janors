@@ -4,7 +4,8 @@
 'use strict'
 function Quote(bot, msg) {
     var rand = Math.floor(Math.random() * Quotes.length);
-    msg.channel.sendMessage(Quotes[rand]);
+    msg.channel.send(Quotes[rand]);
+    if(msg.channel!=msg.author.dmChannel) msg.delete();
 }
 var Quotes = [
     "Все проблемы во вселенной от того, что никто никому не помогает. \n- *Энакин Скайуокер*",

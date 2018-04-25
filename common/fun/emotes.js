@@ -27,11 +27,12 @@ async function emotes(bot, msg, suffix) {
         return;
     } else if (Emotes[emote]===undefined) {
         msg.channel.send("Такой эмоции нет! ")
+        if(msg.channel!=msg.author.dmChannel) msg.delete();
     }
     msg.channel.send("<@"+msg.author.id+">: ");
     var emote = msg.content.substring(1);
     eval(Emotes[emote]);
-    msg.delete();
+    if(msg.channel!=msg.author.dmChannel) msg.delete();
 }
 
 

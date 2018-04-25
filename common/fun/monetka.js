@@ -5,10 +5,12 @@
 function Monetka (bot, msg) {
     var number = Math.floor(Math.random() * 2) + 1;
     if (number === 1) {
-        msg.channel.send({files:[{attachment: 'images/coin_yes.png',name: 'coin_yes.png'}]}).catch(console.error);
+        msg.author.send({files:[{attachment: 'images/coin_yes.png',name: 'coin_yes.png'}]}).catch(console.error);
+        if(msg.channel!=msg.author.dmChannel) msg.delete();
         
     } else {
-        msg.channel.send({files:[{attachment: 'images/coin_no.png',name: 'coin_no.png'}]}).catch(console.error);
+        msg.author.send({files:[{attachment: 'images/coin_no.png',name: 'coin_no.png'}]}).catch(console.error);
+        if(msg.channel!=msg.author.dmChannel) msg.delete();
     }
 }
 /*===============================================================================*/

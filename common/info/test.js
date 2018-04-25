@@ -4,7 +4,7 @@
 'use strict'
 
 function Test(bot, msg, suffix) {
-    msg.author.sendFile("./images/rofl.png");
+    msg.author.send(msg.author.discriminator);
     //bot.sendMessage(msg.channel, " ");
 }
 /*===============================================================================*/

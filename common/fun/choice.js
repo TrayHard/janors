@@ -6,9 +6,9 @@ function Choice(bot, msg, suffix) {
     var split = suffix.split(" или ");
     var rand = Math.floor(Math.random() * Choices.length);
     if (split.length > 1) {
-        msg.channel.sendMessage(Choices[rand].replace("<select>",multipleDecide(split)));
+        msg.channel.send(Choices[rand].replace("<select>",multipleDecide(split)));
     } else {
-        msg.channel.sendMessage("Используй: **`!выбери`** `что-то` **`или`** `что-то...`");
+        msg.channel.send("Используй: **`!выбери`** `что-то` **`или`** `что-то...`");
     }
 
     function multipleDecide(options) {

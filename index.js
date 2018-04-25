@@ -48,10 +48,10 @@ bot.on("message", msg => {
 			if(cmd === undefined)
 			{
 				print("Wrong cmd: "+command)
-				msg.channel.sendMessage("Такой команды нет! Используйте `"+Config.prefix+"help`!")
+				msg.channel.send("Такой команды нет! Используйте `"+Config.prefix+"help`!")
 				return;
 			}
-			cmd(bot, msg, suffix);
+			cmd(bot, msg, suffix, Config.prefix);
 			if( ( (Date.now() - lastCmdTimestamp) / 1000 ) > 5 ){
 				lastCmdTimestamp = Date.now();
 				print(lastCmdTimestamp)
@@ -72,8 +72,8 @@ bot.on("message", msg => {
 				var cmd = commands[command];
 				if (cmd) {
 					print(cmd);
-					cmd(bot, msg, suffix);
-				} else Common.Info.Help(bot, msg, suffix);
+					cmd(bot, msg, suffix, Config.prefix);
+				} else Common.Info.Help(bot, msg, suffix, Config.prefix);
 			}
 		}
 	}

@@ -9,13 +9,12 @@ if (Config.prefix == '!'){
 function Say(bot, msg, suffix) {
     var query = suffix;
     if (!query) {
-        msg.channel.sendMessage("Используй: **`"+prefix+"скажи`** `пример`");
+        msg.channel.send("Используй: **`"+prefix+"скажи`** `пример`");
+        if(msg.channel!=msg.author.dmChannel) msg.delete();
         return;
     }
-    var G = require('gizoogle');
-    G.string(suffix, function(error, translation) {
-        msg.channel.sendMessage(translation);
-    });
+    msg.channel.send(query);
+    if(msg.channel!=msg.author.dmChannel) msg.delete();
 }
 /*===============================================================================*/
 /*===============================================================================*/
