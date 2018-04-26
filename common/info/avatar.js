@@ -3,23 +3,24 @@
  */
 'use strict'
 function Avatar(bot, msg, suffix) {
-    if (msg.mentions.length === 0) {
+    if (msg.mentions.users.array().length === 0) 
+    {
         if (msg.author.avatarURL === null) {
-            msg.channel.sendMessage("Не обманывай меня, нет у тебя никакого аватара!");
+            msg.channel.send("Не обманывай меня, нет у тебя никакого аватара!");
         } else {
-            msg.channel.sendMessage("Держи:\n" + msg.author.avatarURL);
+            msg.channel.send("Держи:\n" + msg.author.avatarURL);
         }
         return;
     }
     var msgArray = [];
-    for (var user of msg.mentions) {
+    for (var user of msg.mentions.users.values()) {
         if (user.avatarURL === null) {
-            msgArray.push(user.username + " без аватара как нищеброд.");
+            msgArray.push(user.username + " без аватара (как loh).");
         } else {
             msgArray.push("Аватар "+ user.username + ":\n" + user.avatarURL);
         }
     }
-    msg.channel.sendMessage(msgArray);
+    msg.author.send(msgArray);
 }
 /*===============================================================================*/
 /*===============================================================================*/

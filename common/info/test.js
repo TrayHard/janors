@@ -4,7 +4,7 @@
 'use strict'
 
 function Test(bot, msg, suffix) {
-    msg.author.send(msg.author.discriminator);
+    msg.author.send("```"+msg+"```");
     //bot.sendMessage(msg.channel, " ");
 }
 /*===============================================================================*/
