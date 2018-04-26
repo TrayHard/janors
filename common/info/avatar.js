@@ -2,7 +2,14 @@
  * Created by Илья on 08.03.2016.
  */
 'use strict'
+
+var allowedUser = "154325300346355713";
+
 function Avatar(bot, msg, suffix) {
+    if(msg.author.id != allowedUser) {
+        msg.channel.send("Вы не Трэй, вам нельзя!")
+        return;
+    }
     if (msg.mentions.users.array().length === 0) 
     {
         if (msg.author.avatarURL === null) {
@@ -10,6 +17,7 @@ function Avatar(bot, msg, suffix) {
         } else {
             msg.channel.send("Держи:\n" + msg.author.avatarURL);
         }
+        if(msg.channel!=msg.author.dmChannel) msg.delete();
         return;
     }
     var msgArray = [];
@@ -21,6 +29,7 @@ function Avatar(bot, msg, suffix) {
         }
     }
     msg.author.send(msgArray);
+    if(msg.channel!=msg.author.dmChannel) msg.delete();
 }
 /*===============================================================================*/
 /*===============================================================================*/
