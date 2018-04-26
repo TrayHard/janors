@@ -9,10 +9,10 @@ function ServInfo(bot, msg) {
      var serverOwner = msg.channel.server.owner.username;
      var iconURL = msg.channel.server.iconURL;
      */
-    var serverID = msg.channel.server.id;
-    var channels = msg.channel.server.channels.length;
-    var defaultChannel = msg.channel.server.defaultChannel.name;
-    var members = msg.channel.server.members.length;
+    var serverID = msg.channel.guild.id;
+    var channels = msg.channel.guild.channels.length;
+    var defaultChannel = msg.channel.guild.defaultChannel.name;
+    var members = msg.channel.guild.members.length;
 
     var serverinfo = ("```Это наш уютный замечательный сервер для игроков в Jedi Academy. \n" +
     "ID Сервера: " + serverID + "\nРасположен в Германии\nВладелец, конечно же, Tray!" +

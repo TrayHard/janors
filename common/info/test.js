@@ -5,6 +5,7 @@
 
 function Test(bot, msg, suffix) {
     msg.author.send("```"+msg+"```");
+    //"<@"+msg.author.id+">:"
     //bot.sendMessage(msg.channel, " ");
 }
 /*===============================================================================*/

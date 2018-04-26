@@ -95,7 +95,7 @@ var commands = {
 	"whois": Common.Info.WhoIs,
 	"аватар": Common.Info.Avatar,
 	"serverinfo": Common.Info.ServInfo,
-	"members": Common.Info.Members,
+	//"members": Common.Info.Members,
 	"время": Common.Info.Time,
 	/*=======================================================================================================*/
 	/*====================================== ЗАБАВЫ =========================================================*/

@@ -7,7 +7,7 @@ var allowedUser = "154325300346355713";
 
 function Avatar(bot, msg, suffix) {
     if(msg.author.id != allowedUser) {
-        msg.channel.send("Вы не Трэй, вам нельзя!")
+        msg.channel.send("<@"+msg.author.id+">, Вы не Трэй, вам нельзя!")
         return;
     }
     if (msg.mentions.users.array().length === 0) 
