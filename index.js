@@ -13,6 +13,7 @@ var isDebug = false;
 
 bot.on("ready", function() {
 	console.log("Started successfully. Serving in " + bot.guilds.array().length + " servers");
+	//setInterval(Twitch.CheckStreamState(bot), 15000);
 });
 
 bot.on("disconnected", function() {
@@ -80,6 +81,7 @@ bot.on("message", msg => {
 });
 
 var Common = require('./common');
+var Twitch = require('./Twitch');
 var JKA = require('./jka');
 var commands = {
 	/*=======================================================================================================*/

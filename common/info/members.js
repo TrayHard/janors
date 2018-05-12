@@ -4,7 +4,7 @@
 'use strict'
 function Members(bot, msg) {
     var serversList = "";
-    for (var server of bot.servers.sort()) {
+    for (var server of bot.guilds.sort()) {
         let online = 0;
         let member = "";
         serversList += "**` Количество участников: " + server.members.length + " (";
