@@ -6,32 +6,33 @@ var Config = require("../../config.json");
 var request = require('request');
 
 function Test(bot, msg, suffix) {
-    var userID = "63614185"//"114077213"; // trayhardplay UserID
+    console.log(bot.channels.first().send("qq suka"));
+    
+    
+    
+    // var userID = "63614185"//"114077213"; // trayhardplay UserID
 
-    var options = {
-        url: 'https://api.twitch.tv/kraken/streams/23161357',
-        headers: {
-          'Client-ID': Config.clientID,
-          'Accept': 'application/vnd.twitchtv.v5+json'
-        }
-      };
-       
-      function callback(error, response, body) {
-        if (!error && response.statusCode == 200) {
-          var info = JSON.parse(body);
-          console.log("BODY:");
-          console.log(info.stream.game);
-          msg.channel.send(info.stream.channel.display_name+" запустил стрим!\n"+
-          "Игра: "+info.stream.game+"\n"+
-          "Заголовок: "+info.stream.channel.status+"\n", {
-            files: [info.stream.preview.large]
-          })
-        } else if (error) {
-            console.log(error);
-        }
-      }
-       
-      request(options, callback);
+    // var options = {
+    //     url: 'https://api.twitch.tv/kraken/streams/23161357',
+    //     headers: {
+    //       'Client-ID': Config.clientID,
+    //       'Accept': 'application/vnd.twitchtv.v5+json'
+    //     }
+    //   };
+    // request(options, (error, response, body)=> {
+    //     if (!error && response.statusCode == 200) {
+    //       var info = JSON.parse(body);
+    //       console.log("BODY:");
+    //       console.log(info.stream.game);
+    //       msg.channel.send(info.stream.channel.display_name+" запустил стрим!\n"+
+    //       "Игра: "+info.stream.game+"\n"+
+    //       "Заголовок: "+info.stream.channel.status+"\n", {
+    //         files: [info.stream.preview.large]
+    //       })
+    //     } else if (error) {
+    //         console.log(error);
+    //     }
+    // });
 
 
 

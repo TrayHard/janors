@@ -10,10 +10,14 @@ var bot = new Discord.Client();
 var lastCmdTimestamp;
 
 var isDebug = false;
+var isStreamOnline = false;
+
+const streamRequestTimer = 15;
 
 bot.on("ready", function() {
 	console.log("Started successfully. Serving in " + bot.guilds.array().length + " servers");
-	//setInterval(Twitch.CheckStreamState(bot), 15000);
+	setInterval(() => { return Twitch.CheckStreamState(bot,isStreamOnline).bind(this) },15000)
+	/*bot.channels.first().send("isStreamOnline: "+isStreamOnline);*/ 
 });
 
 bot.on("disconnected", function() {
