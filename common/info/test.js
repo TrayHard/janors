@@ -6,10 +6,7 @@ var Config = require("../../config.json");
 var request = require('request');
 
 function Test(bot, msg, suffix) {
-    console.log(bot.channels.first().send("qq suka"));
-    
-    
-    
+    console.log(bot.channels.find("name","tests"));
     // var userID = "63614185"//"114077213"; // trayhardplay UserID
 
     // var options = {

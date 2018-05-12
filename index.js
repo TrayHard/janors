@@ -10,13 +10,17 @@ var bot = new Discord.Client();
 var lastCmdTimestamp;
 
 var isDebug = false;
-var isStreamOnline = false;
+// Суперкостыль, чтобы сохранять значение переменной
+var state = {
+	// Онлайн ли отслеживаемый стрим
+	isStreamOnline: false,
+}
 
 const streamRequestTimer = 15;
 
 bot.on("ready", function() {
 	console.log("Started successfully. Serving in " + bot.guilds.array().length + " servers");
-	setInterval(() => {bot.channels.first().send("isStreamOnline: "+isStreamOnline); return Twitch.CheckStreamState(bot,isStreamOnline) },15000)
+	setInterval(() => { return Twitch.CheckStreamState(bot,state) }, streamRequestTimer * 1000)
 	
 });
 
