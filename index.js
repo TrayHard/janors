@@ -16,8 +16,8 @@ const streamRequestTimer = 15;
 
 bot.on("ready", function() {
 	console.log("Started successfully. Serving in " + bot.guilds.array().length + " servers");
-	setInterval(() => { return Twitch.CheckStreamState(bot,isStreamOnline).bind(this) },15000)
-	/*bot.channels.first().send("isStreamOnline: "+isStreamOnline);*/ 
+	setInterval(() => {bot.channels.first().send("isStreamOnline: "+isStreamOnline); return Twitch.CheckStreamState(bot,isStreamOnline) },15000)
+	
 });
 
 bot.on("disconnected", function() {

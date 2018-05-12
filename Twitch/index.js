@@ -35,6 +35,7 @@ function CheckStreamState(bot, isStreamOnline) {
             console.log(error);
         }
     });
+    return isStreamOnline;
 }
 
 module.exports.CheckStreamState = CheckStreamState;
