@@ -16,12 +16,11 @@ var state = {
 	isStreamOnline: false,
 }
 
-const streamRequestTimer = 15;
+const streamRequestTimer = 40;
 
 bot.on("ready", function() {
 	console.log("Started successfully. Serving in " + bot.guilds.array().length + " servers");
 	setInterval(() => { return Twitch.CheckStreamState(bot,state) }, streamRequestTimer * 1000)
-	
 });
 
 bot.on("disconnected", function() {

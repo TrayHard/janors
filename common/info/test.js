@@ -6,16 +6,91 @@ var Config = require("../../config.json");
 var request = require('request');
 
 function Test(bot, msg, suffix) {
-    console.log(bot.channels.find("name","tests"));
-    // var userID = "63614185"//"114077213"; // trayhardplay UserID
+    console.log();
 
-    // var options = {
-    //     url: 'https://api.twitch.tv/kraken/streams/23161357',
-    //     headers: {
-    //       'Client-ID': Config.clientID,
-    //       'Accept': 'application/vnd.twitchtv.v5+json'
+    // msg.channel.send("<@&435380257265287178>", {
+    //     embed: {
+    //         title: "",
+    //         description: "",
+    //         color: 1255
+    //         ,fields:[
+    //             {
+    //                 name: "**PLAYERUNKNOWN'S BATTLEGROUNDS**",
+    //                 value: "```PUBG (солим (слезами (врагов (от смеха)))```https://www.twitch.tv/trayhardplay",
+    //                 inline: false
+    //             }
+    //         ]
+    //         ,thumbnail: {
+    //             url: "https://static-cdn.jtvnw.net/jtv_user_pictures/d10964ed-068b-4981-9b48-3466fbe6263e-profile_image-300x300.png",
+    //             height: 550,
+    //             weight: 250
+    //         }
+    //         ,author: {
+    //             name: "TrayHardPlay: поток подрублен!",
+    //             url: "https://www.twitch.tv/trayhardplay",
+    //             icon_url: "https://static-cdn.jtvnw.net/jtv_user_pictures/d10964ed-068b-4981-9b48-3466fbe6263e-profile_image-300x300.png"
+    //         }
+    //         ,provider:{
+    //             name: "TRAY",
+    //             url: "https://www.twitch.tv/trayhardplay"
+    //         }
+    //         // ,footer: {
+    //         //     text: "https://www.twitch.tv/trayhardplay",
+    //         //     icon_url: "https://cdn.discordapp.com/avatars/154325300346355713/7da7e4fe880cfca1c907878e3d97de44.png",
+
+    //         // }
     //     }
-    //   };
+    // });
+    var userID = "114077213"; // trayhardplay UserID 114077213 
+var serverID = "154328532875608075";
+var roleName = "Зрители"
+    var options = {
+        url: 'https://api.twitch.tv/kraken/streams/'+userID,
+        headers: {
+          'Client-ID': Config.clientID,
+          'Accept': 'application/vnd.twitchtv.v5+json'
+        }
+      };
+      //info.stream.preview.large
+    request(options, (error, response, body)=> {
+        if (!error && response.statusCode == 200) {
+          var info = JSON.parse(body);
+          console.log("BODY:");
+          console.log(info.stream.game);
+          bot.channels.find("name","tests").send("", {  //"<@&"+roleID+">"
+            embed: {
+                title: "",
+                description: "",
+                color: 1255
+                ,fields:[
+                    {
+                        name: "**"+info.stream.game+"**",
+                        value: "```"+info.stream.channel.status+"```https://www.twitch.tv/trayhardplay",
+                        inline: false
+                    }
+                ],
+                image: {
+                    url: info.stream.preview.large
+                }
+                ,author: {
+                    name: "TrayHardPlay: поток подрублен!",
+                    url: "https://www.twitch.tv/trayhardplay",
+                    icon_url: "https://static-cdn.jtvnw.net/jtv_user_pictures/d10964ed-068b-4981-9b48-3466fbe6263e-profile_image-300x300.png"
+                }
+                ,provider:{
+                    name: "TRAY",
+                    url: "https://www.twitch.tv/trayhardplay"
+                }
+                // ,footer: {
+                //     text: "https://www.twitch.tv/trayhardplay",
+                //     icon_url: "https://cdn.discordapp.com/avatars/154325300346355713/7da7e4fe880cfca1c907878e3d97de44.png",
+                // }
+            }
+        });
+        } else if (error) {
+            console.log(error);
+        }
+    });
     // request(options, (error, response, body)=> {
     //     if (!error && response.statusCode == 200) {
     //       var info = JSON.parse(body);
@@ -24,7 +99,7 @@ function Test(bot, msg, suffix) {
     //       msg.channel.send(info.stream.channel.display_name+" запустил стрим!\n"+
     //       "Игра: "+info.stream.game+"\n"+
     //       "Заголовок: "+info.stream.channel.status+"\n", {
-    //         files: [info.stream.preview.large]
+            
     //       })
     //     } else if (error) {
     //         console.log(error);
@@ -66,7 +141,7 @@ function Test(bot, msg, suffix) {
     //             }
     //         ]
     //         ,thumbnail: {
-    //             url: "https://cdn.discordapp.com/avatars/154325300346355713/7da7e4fe880cfca1c907878e3d97de44.png",
+    //             url: "https://static-cdn.jtvnw.net/jtv_user_pictures/d10964ed-068b-4981-9b48-3466fbe6263e-profile_image-300x300.png",
     //             height: 550,
     //             weight: 250
     //         }
