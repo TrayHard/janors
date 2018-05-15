@@ -33,7 +33,7 @@ function CheckStreamState(bot, state) {
                                 }
                             ],
                             image: {
-                                url: info.stream.preview.large+"?{Date.now()}"
+                                url: info.stream.preview.large+`?${Date.now()}`
                             },
                             author: {
                                 name: "TrayHardPlay: поток подрублен!",
