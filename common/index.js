@@ -25,7 +25,8 @@ var Useful =
 {
     YouTube: require('./useful/youtube.js'),
     Wikipedia: require('./useful/wiki.js'),
-    Slovar: require('./useful/slovar.js')
+    Slovar: require('./useful/slovar.js'),
+    Restart: require('./useful/restart.js')
 }
 
 module.exports.Info = Info;

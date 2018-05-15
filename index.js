@@ -23,12 +23,6 @@ bot.on("ready", function() {
 	setInterval(() => { return Twitch.CheckStreamState(bot,state) }, streamRequestTimer * 1000)
 });
 
-bot.on("disconnected", function() {
-	console.log(currentTime() + "Disconnected. Attempting to reconnect...");
-	sleep(5000);
-	bot.login(Config.token);
-});
-
 function print(msg)
 {
 	console.log(msg);
@@ -138,7 +132,8 @@ var commands = {
 	"youtube": Common.Useful.YouTube,
 	"словарь": Common.Useful.Slovar,
 	"вики": Common.Useful.Wikipedia,
-	"mon": JKA.Info.Monitoring
+	"mon": JKA.Info.Monitoring,
+	"res": Common.Useful.Restart
 	/*=======================================================================================================*/
 	/*====================================== ЗАБАВЫ =========================================================*/
 	/*=======================================================================================================*/
