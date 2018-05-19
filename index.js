@@ -14,9 +14,11 @@ var isDebug = false;
 var state = {
 	// Онлайн ли отслеживаемый стрим
 	isStreamOnline: false,
+	gameName: "",
+	title: ""
 }
 
-const streamRequestTimer = 40;
+const streamRequestTimer = 30;
 
 bot.on("ready", function() {
 	console.log("Started successfully. Serving in " + bot.guilds.array().length + " servers");

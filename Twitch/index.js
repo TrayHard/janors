@@ -2,7 +2,8 @@ var request = require('request');
 var Config = require("../config.json");
 var userID = "114077213"; // trayhardplay UserID 114077213 
 var serverID = "154328532875608075";
-var roleName = "Зрители"
+var roleName = "Зрители";
+var channelName = "news_streams";
 
 function CheckStreamState(bot, state) {
     var roleID = bot.guilds.find("id", serverID).roles.find("name", roleName).id
@@ -20,7 +21,7 @@ function CheckStreamState(bot, state) {
           if(!state.isStreamOnline){  // Если стрим был оффлайн
                 if(info.stream != null) {  // А стал онлайн
                     // То пишем об этом сообщение
-                    bot.channels.find("name","news_streams").send("<@&"+roleID+">", {  //
+                    bot.channels.find("name",channelName).send("<@&"+roleID+">", {  //
                         embed: {
                             title: "",
                             description: "",
@@ -46,13 +47,47 @@ function CheckStreamState(bot, state) {
                             }
                         }
                     });
-                    // И ставим, что стрим теперь онлайн
+                    // И обновляем state
                     state.isStreamOnline = true;
+                    state.gameName = info.stream.game;
+                    state.title = info.stream.channel.status;
                 }
           } else {              // Если стрим был онлайн
             if(info.stream == null) {  // А стал оффлайн
                 // Ставим что он теперь оффлайн
                 state.isStreamOnline = false;
+            } else {
+                if(state.gameName != info.stream.game || state.title != info.stream.channel.status){
+                    bot.channels.find("name", channelName).send("<@&"+roleID+">", {  //
+                        embed: {
+                            title: "",
+                            description: "",
+                            color: 1255,
+                            fields:[
+                                {
+                                    name: "**"+info.stream.game+"**",
+                                    value: "```"+info.stream.channel.status+"```\nhttps://www.twitch.tv/trayhardplay\n",
+                                    inline: false
+                                }
+                            ],
+                            image: {
+                                url: info.stream.preview.large+`?${Date.now()}`
+                            },
+                            author: {
+                                name: "TrayHardPlay: сменил игру!",
+                                url: "https://www.twitch.tv/trayhardplay",
+                                icon_url: "https://static-cdn.jtvnw.net/jtv_user_pictures/d10964ed-068b-4981-9b48-3466fbe6263e-profile_image-300x300.png"
+                            },
+                            provider:{
+                                name: "TRAY",
+                                url: "https://www.twitch.tv/trayhardplay"
+                            }
+                        }
+                    });
+                    // И обновляем state
+                    state.gameName = info.stream.game;
+                    state.title = info.stream.channel.status;
+                }
             }
           }
         } else if (error) {
