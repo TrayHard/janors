@@ -3,7 +3,14 @@ var Config = require("../config.json");
 var userID = "114077213"; // trayhardplay UserID 114077213 
 var serverID = "154328532875608075";
 var roleName = "Зрители";
-var channelName = "news_streams";
+var gameRoles = {
+    "Creative": "<@&435391284081852417>",
+    "PLAYERUNKNOWN\'S BATTLEGROUNDS": "<@&435403107875160067>",
+    "Counter-Strike: Global Offensive": "<@&435404401742446595>",
+    "Dota 2": "<@&224237115381121025>",
+    "Star Wars: Jedi Knight - Jedi Academy": "<@&154872872769290240>"
+} 
+var channelName = "tests";
 
 function CheckStreamState(bot, state) {
     var roleID = bot.guilds.find("id", serverID).roles.find("name", roleName).id
@@ -21,7 +28,7 @@ function CheckStreamState(bot, state) {
           if(!state.isStreamOnline){  // Если стрим был оффлайн
                 if(info.stream != null) {  // А стал онлайн
                     // То пишем об этом сообщение
-                    bot.channels.find("name",channelName).send("<@&"+roleID+">", {  //
+                    bot.channels.find("name",channelName).send(`<@&${roleID}> ${gameRoles[info.stream.game]}`, {  //
                         embed: {
                             title: "",
                             description: "",
