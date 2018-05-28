@@ -10,11 +10,8 @@ var gameRoles = {
     "Dota 2": "<@&224237115381121025>",
     "Star Wars: Jedi Knight - Jedi Academy": "<@&154872872769290240>"
 } 
-<<<<<<< HEAD
 var channelName = "news_streams";
-=======
 var channelName = "tests";
->>>>>>> d96623e283b1fb01332ef8b2b443f1a7027d8acf
 
 function CheckStreamState(bot, state) {
     var roleID = bot.guilds.find("id", serverID).roles.find("name", roleName).id
