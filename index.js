@@ -2,9 +2,9 @@
 var Discord = require("discord.js");
 var Config = require("./config.json");
 
-
 var multiline = require("multiline");
 var qs = require("querystring");
+var fs = require("fs");
 
 var bot = new Discord.Client();
 var lastCmdTimestamp;
@@ -17,11 +17,20 @@ var state = {
 	gameName: "",
 	title: ""
 }
+// Доступные роли для менеджера ролей
+var managedRoles = [];
 
 const streamRequestTimer = 30;
 
 bot.on("ready", function() {
 	console.log("Started successfully. Serving in " + bot.guilds.array().length + " servers");
+	// Читаем список доступных для менеджера ролей
+	fs.readFile("roles.json", (err, data)=>{
+	    if(err) { console.log("RoleReadError: " + err.message); return;}
+		managedRoles = JSON.parse(data);
+		Common.Useful.RefreshRoles(bot, managedRoles);
+	    console.log("Roles have been read succesfully!");
+	})
 	setInterval(() => { return Twitch.CheckStreamState(bot,state) }, streamRequestTimer * 1000)
 });
 
@@ -36,8 +45,8 @@ bot.on("message", msg => {
 	//   /^Jan[\s(.+)]/
 	if (Config.prefix == '!') {
 		if (msg.content[0] === Config.prefix) {
-			var command = msg.content.toLowerCase().split(" ")[0].substring(1);
-			var suffix = msg.content.toLowerCase().substring(command.length + 2);
+			var command = msg.content.split(" ")[0].substring(1);
+			var suffix = msg.content.substring(command.length + 2).trim();
 			if(isDebug)
 			{
 				print("Message: \"" + msg.content + "\"");
@@ -55,7 +64,11 @@ bot.on("message", msg => {
 				msg.channel.send("Такой команды нет! Используйте `"+Config.prefix+"help`!")
 				return;
 			}
-			cmd(bot, msg, suffix, Config.prefix);
+			if(command == "roles"){
+				cmd(bot, msg, suffix, managedRoles);
+			} else {
+				cmd(bot, msg, suffix, Config.prefix);
+			}
 			if( ( (Date.now() - lastCmdTimestamp) / 1000 ) > 5 ){
 				lastCmdTimestamp = Date.now();
 				print(lastCmdTimestamp)
@@ -67,16 +80,20 @@ bot.on("message", msg => {
 		if (appeal) {
 			var name = appeal[0].match(/\S+/)[0];
 			if (name === Config.prefix) {
-				var args = msg.content.toLowerCase().split(" ");
+				var args = msg.content.split(" ");
 				var command = args[1];
-				var suffix = msg.content.toLowerCase().slice(name.length + command.length + 2);
+				var suffix = msg.content.slice(name.length + command.length + 2).trim();
 				print("Message: \"" + msg.content + "\"");
 				print("Command: " + command);
 				print("Suffix: " + suffix);
 				var cmd = commands[command];
 				if (cmd) {
 					print(cmd);
-					cmd(bot, msg, suffix, Config.prefix);
+					if(command == "roles"){
+						cmd(bot, msg, suffix, managedRoles);
+					} else {
+						cmd(bot, msg, suffix, Config.prefix);
+					}
 				} else Common.Info.Help(bot, msg, suffix, Config.prefix);
 			}
 		}
@@ -135,7 +152,8 @@ var commands = {
 	"словарь": Common.Useful.Slovar,
 	"вики": Common.Useful.Wikipedia,
 	"mon": JKA.Info.Monitoring,
-	"res": Common.Useful.Restart
+	"res": Common.Useful.Restart,
+	"roles": Common.Useful.ManageRoles,
 	/*=======================================================================================================*/
 	/*====================================== ЗАБАВЫ =========================================================*/
 	/*=======================================================================================================*/

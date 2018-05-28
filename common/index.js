@@ -1,4 +1,5 @@
 'use strict'
+
 var Info =
 {
     Help: require('./info/help.js'),
@@ -7,7 +8,7 @@ var Info =
     WhoIs: require('./info/whois.js'),
     ServInfo: require('./info/serverinfo.js'),
     Test: require('./info/test.js'),
-    Time: require('./info/time.js')
+    Time: require('./info/time.js'),
 }
 var Fun =
 {
@@ -19,15 +20,17 @@ var Fun =
     Say: require('./fun/say.js'),
     Meme: require('./fun/memes.js'),
     Emotes: require('./fun/emotes.js'),
-    Gifka: require('./fun/gifka.js')
+    Gifka: require('./fun/gifka.js'),
 }
 var Useful =
 {
     YouTube: require('./useful/youtube.js'),
     Wikipedia: require('./useful/wiki.js'),
     Slovar: require('./useful/slovar.js'),
-    Restart: require('./useful/restart.js')
-}
+    Restart: require('./useful/restart.js'),
+    ManageRoles: require('./useful/roles.js').ManageRoles,
+    RefreshRoles: require('./useful/roles.js').RefreshRoles,
+};
 
 module.exports.Info = Info;
 module.exports.Fun = Fun;
