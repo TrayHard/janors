@@ -2,6 +2,8 @@
 logs
 *.log
 config.json
+!JAN ORS.bat
+npmi.bat
 
 # Runtime data
 pids

@@ -19,7 +19,7 @@ var Fun =
     Kosti: require('./fun/kosti.js'),
     Say: require('./fun/say.js'),
     Meme: require('./fun/memes.js'),
-    Emotes: require('./fun/emotes.js'),
+    // Emotes: require('./fun/emotes.js'),
     Gifka: require('./fun/gifka.js'),
 }
 var Useful =
