@@ -1,11 +1,17 @@
 const botconfig = require("dotenv").config().parsed;
 const Discord = require("discord.js");
 const fs = require("fs");
+const db = require('./db')
+
+console.log("database");
+console.log(db);
+
 const bot = new Discord.Client({ disableEveryone: false });
 const client = new Discord.Client();
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 const activities_list = ["Hello everyone!"];
+
 bot.on("ready", () => {
     bot.user.setStatus("available");
     setInterval(() => {
@@ -15,12 +21,14 @@ bot.on("ready", () => {
         bot.user.setActivity(activities_list[index], { type: "PLAYING" });
     }, 10000);
 });
+
 bot.on("ready", () => {
     console.log(`The bot ${bot.user.username} has been started`);
     bot.generateInvite(["ADMINISTRATOR"]).then((link) => {
         console.log(link);
     });
 });
+
 fs.readdir("./cmds/", (err, files) => {
     if (err) console.log(err);
     let jsfile = files.filter((f) => f.split(".").pop() === "js");
@@ -37,6 +45,7 @@ fs.readdir("./cmds/", (err, files) => {
         });
     });
 });
+
 bot.on("message", async (message) => {
     if (message.author.bot) return;
     if (message.channel.type === "dm") return;
@@ -59,6 +68,7 @@ bot.on("message", async (message) => {
         commandfile.run(bot, message, args);
     } catch (e) {}
 });
+
 bot.on("message", (msg) => {
     if (msg.content === "!rins ass") {
         msg.reply(
@@ -66,6 +76,7 @@ bot.on("message", (msg) => {
         );
     }
 });
+
 bot.on("message", (msg) => {
     if (msg.content === "!pughelp") {
         msg.channel.send(
@@ -73,4 +84,6 @@ bot.on("message", (msg) => {
         );
     }
 });
+
 bot.login(botconfig.TOKEN);
+

@@ -1,12 +1,14 @@
 {
-  "name": "pugbot",
+  "name": "ladder-bot",
   "version": "1.0.0",
-  "description": "pug for jka",
-  "main": "tohsaka.js",
+  "description": "Discord Ladder Bot",
+  "main": "main.js",
   "dependencies": {
+    "colors": "^1.4.0",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "moment": "^2.27.0",
+    "mongoose": "^5.9.24",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.4",
     "request": "^2.88.2",
@@ -16,16 +18,16 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon tohsaka.js"
+    "start": "nodemon main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rusinator/Tohsaka-Rin.git"
+    "url": "git+https://github.com/TrayHard/janors.git"
   },
-  "author": "Rusinator)",
+  "author": "Tray",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Rusinator/Tohsaka-Rin/issues"
+    "url": "https://github.com/TrayHard/janors/issues"
   },
-  "homepage": "https://github.com/Rusinator/Tohsaka-Rin#readme"
+  "homepage": "https://github.com/TrayHard/janors"
 }
