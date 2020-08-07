@@ -16,9 +16,14 @@
     "superagent": "^5.2.2",
     "validator": "^13.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.10.4"
+  },
   "scripts": {
-    "start": "nodemon main.js"
+    "start": "nodemon src/main.js"
   },
   "repository": {
     "type": "git",

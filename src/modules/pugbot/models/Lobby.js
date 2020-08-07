@@ -1,28 +1,20 @@
-const botconfig = require("dotenv").config().parsed
 const Discord = require("discord.js");
-const validator = require("validator");
 const moment = require('moment');
+const botconfig = require("dotenv").config().parsed
 
-const DEV = botconfig.DEV;
-
-// Опции класса Lobby
-const options = {
-    LOBBY_LIFE_TIME: DEV ? 30 : 900,
-    TIME_LIMIT_FOR_PRECOLLECT: DEV ? 20 : 60,
-    TIME_BETWEEN_CD_UPDATES: DEV ? 5 : 5,
-    COLOR_LOBBY_CREATED: "#c0c0c0",
-    COLOR_LOBBY_PRECOLLECTED: "#e9ec5e",
-    COLOR_LOBBY_COLLECTED: "#2ecc71",
-    COLOR_LOBBY_FAILED: "#ff8080",
-    MIN_PLAYERS_REQUIRED: DEV ? 1 : 4,
-    MAX_PLAYERS_REQUIRED: 6,
-}
-// Всё время в секундах
-const EMOJI = "✅";
-const ROLEID_FOR_MENTION = "528086822232915990";
-
-class Lobby {
+module.exports = class Lobby {
     constructor(args, options) {
+        this.options = {
+            LOBBY_LIFE_TIME: options.LOBBY_LIFE_TIME, // Number
+            TIME_LIMIT_FOR_PRECOLLECT: options.TIME_LIMIT_FOR_PRECOLLECT, // Number
+            TIME_BETWEEN_CD_UPDATES: options.TIME_BETWEEN_CD_UPDATES, // Number
+            COLOR_LOBBY_CREATED: options.COLOR_LOBBY_CREATED, // String
+            COLOR_LOBBY_PRECOLLECTED: options.COLOR_LOBBY_PRECOLLECTED, // String
+            COLOR_LOBBY_COLLECTED: options.COLOR_LOBBY_COLLECTED, // String
+            COLOR_LOBBY_FAILED: options.COLOR_LOBBY_FAILED, // String
+            MIN_PLAYERS_REQUIRED: options.MIN_PLAYERS_REQUIRED, // Number
+            MAX_PLAYERS_REQUIRED: options.MAX_PLAYERS_REQUIRED // Number
+        };
         this.options = {...options};
         this.author = args.author;
         this.size = args.size ? args.size : "any";
@@ -154,68 +146,4 @@ class Lobby {
         }
 
     }
-}
-
-module.exports.run = async (bot, userMsg, args) => {
-    // !lobby [players num] [rujka.ru:29080] [password]
-    let [size, server, pw] = args;
-    if (args.length && !validateInput(userMsg, args)) return
-
-    let lobby = new Lobby({ author: userMsg.author, size, server, pw }, options)
-
-    if (!DEV) await userMsg.channel.send(`<@&${ROLEID_FOR_MENTION}>`)
-    userMsg.channel.send(lobby.embed).then((botMsg) => {
-        botMsg.react(EMOJI);
-        // Отлавливаем ✅
-        const collectorOfUsers = botMsg.createReactionCollector(
-            (reaction) => reaction.emoji.name == EMOJI,
-            {
-                // maxUsers: 2,
-                maxUsers: lobby.size === "2"  ? options.MIN_PLAYERS_REQUIRED : options.MAX_PLAYERS_REQUIRED,
-                dispose: true
-            }
-        );
-        // Когда прислали ✅
-        collectorOfUsers.on("collect", (reaction, userToAdd) => lobby.addPlayer(userToAdd));
-        // Когда сняли ✅
-        collectorOfUsers.on("remove", (reaction, userToRemove) => lobby.removePlayer(userToRemove))
-        // Когда собраны все ✅
-        collectorOfUsers.on("end", (collection, reason) => lobby.finish(reason));
-        // Отлавливаем лишние эмодзи и удаляем
-        const collectorToRemove = botMsg.createReactionCollector((reaction) => reaction.emoji.name != EMOJI);
-        collectorToRemove.on("collect", (reaction) => reaction.remove());
-        // Заносим коллекторы и сообщение в лобби
-        lobby.addCollector(collectorOfUsers)
-        lobby.addCollector(collectorToRemove)
-        lobby.addMessage(botMsg)
-    });
-    userMsg.delete();
-};
-module.exports.help = {
-    name: "lobby",
-    aliases: ["pug","лобби","пуг"],
-};
-
-function validateInput (msg, args) {
-    let helpString = "`"+botconfig.PREFIX+"pug [2/3/any] [ip:port] [pw]`"
-    let [lobbySize, server, password] = args;
-    if (!["2", "3", "any"].includes(lobbySize)) {
-        msg.channel.send("Неверный ввод данных. Ошибка при вводе количества игроков!\n"+helpString);
-        return false;
-    }
-    if (server) {
-        let serverArr = server.split(":");
-        if (
-            serverArr.length != 2 ||
-            !(
-                validator.isIP(serverArr[0], 4) ||
-                validator.isFQDN(serverArr[0])
-            ) ||
-            !validator.isPort(serverArr[1])
-        ) {
-            msg.channel.send("Неверный ввод данных. Ошибка ввода айпи сервера!\n"+helpString);
-            return false;
-        }
-    }
-    return true
 }
