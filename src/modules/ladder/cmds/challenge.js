@@ -5,7 +5,6 @@ const ChallengeCmd = new Command({
     desc: "Cmd to challenge someone for a match in ladder",
     triggers: ['challenge', 'вызвать'],
     run: (bot, userMsg, args) => {
-        console.log("CHALLENGE WORKS");
         bot.send("challenge works!")
     }
 })

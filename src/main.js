@@ -1,8 +1,9 @@
 const botconfig = require("dotenv").config().parsed;
 const Discord = require("discord.js");
-// const db = require('./db')
+const db = require('./db')
 const fs = require('fs');
 const path = require('path');
+const log = require("./lib/utils/logger")
 
 const MODULES_FOLDER = './modules'
 
@@ -14,9 +15,9 @@ bot.commands = new Discord.Collection();
 // bot.aliases = new Discord.Collection();
 
 bot.on("ready", () => {
-    console.log("prefix:", botconfig.PREFIX);
+    log.debug("prefix:", botconfig.PREFIX);
     bot.generateInvite(["ADMINISTRATOR"]).then((link) => {
-        console.log(link);
+        log.print(link);
     });
 
     // Taking all cmd modules
@@ -28,9 +29,10 @@ bot.on("ready", () => {
         let module = require(path.join(__dirname, MODULES_FOLDER, folder))
         bot.modules.set(module.name, module);
         module.cmds.forEach(cmd => cmd.triggers.forEach(trigger => bot.commands.set(trigger, cmd)));
-        console.log(`Module '${module.name}' has been loaded!`);
+        module.init(bot)
+        log.debug(`Module '${module.name}' has been loaded!`);
     })
-    console.log(`The bot ${bot.user.username} has been started`);
+    log.print(`The bot ${bot.user.username} has been started`);
 });
 
 bot.on("message", async (message) => {
