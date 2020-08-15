@@ -19,7 +19,7 @@ bot.on("ready", () => {
     bot.generateInvite(["ADMINISTRATOR"]).then((link) => {
         log.print(link);
     });
-
+    log.debug("Loading modules...".yellow)
     // Taking all cmd modules
     const modulesArray =
         fs.readdirSync(path.join(__dirname, MODULES_FOLDER))
@@ -32,16 +32,14 @@ bot.on("ready", () => {
         module.init(bot)
         log.debug(`Module '${module.name}' has been loaded!`);
     })
-    log.print(`The bot ${bot.user.username} has been started`);
+    log.print(`${bot.user.username} started successfully!`.cyan);
 });
 
 bot.on("message", async (message) => {
     if (message.author.bot) return;
     if (message.content.slice(0, botconfig.PREFIX.length) !== botconfig.PREFIX) return;
     if (message.channel.type === "dm") return;
-    bot.send = function (msg) {
-        message.channel.send(msg);
-    };
+    bot.send = (msg) => message.channel.send(msg)
     let args = message.content
         .slice(botconfig.PREFIX.length)
         .trim()

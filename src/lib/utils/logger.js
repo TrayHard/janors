@@ -13,7 +13,7 @@ module.exports = {
     },
     debug: (...message) => {
         if (botconfig.DEBUG)
-            console.log(colors.yellow('[Debug]:'), ...message)
+            console.log(colors.yellow('[Debug]:'), message.join(' ').gray)
     },
     errTypes: {
         DB: "Database",
