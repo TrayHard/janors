@@ -1,0 +1,12 @@
+[
+    {
+        "name": "RUJKA Main 1x1 Ladder",
+        "startPointAmount": 1500,
+        "openMatchesLimit": 5
+    },
+    {
+        "name": "RUJKA Academy 1x1 Ladder",
+        "startPointAmount": 1500,
+        "openMatchesLimit": 5
+    }
+]

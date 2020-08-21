@@ -3,7 +3,7 @@ const botconfig = require("dotenv").config().parsed
 
 module.exports = {
     error: (type, ...message) => {
-        console.error(colors.red(`[${type} error]: ${message}`))
+        console.error(colors.red(`[${type}]: ${message.join(' ')}`))
     },
     warn: (...message) => {
         console.warn(colors.yellow(`[Warning]: ${message}`))

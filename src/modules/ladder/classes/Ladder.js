@@ -5,7 +5,8 @@ const mongoose = require('../../../db');
 
 module.exports = class Ladder {
     constructor(params) {
-        if (checkLadder(params.name)) {
+        //TODO: Проверяем снаружи через статический метод наличие ладдера и если такого нет, то тогда уже создаем
+        if (isExists) {
             let err = `Ladder ${params.name} already exists`
             log.error(log.errTypes.DB, err)
             throw new Error(err)
@@ -15,7 +16,7 @@ module.exports = class Ladder {
         this.openMatchesLimit = params.openMatchesLimit
         this.participants = []
         this.matches = []
-        const ladder = new Ladder({
+        const ladder = new LadderDB({
             _id: mongoose.Types.ObjectId(),
             name: params.name,
             startPointAmount: params.startPointAmount,
@@ -28,11 +29,11 @@ module.exports = class Ladder {
             .catch(err => log.error(log.errTypes.DB, err));
     }
     async checkLadder(name) {
-        return await Ladder.findOne({name})
+        return await LadderDB.findOne({name})
     }
     static async getLadder(name) {
         try {
-            const ladder = await Ladder.find({name})
+            const ladder = await LadderDB.find({name})
             if (!ladder) return null
         } catch (error) {
             log.error(log.errTypes.Ladder, `Can't find ladder "${name}"`)

@@ -28,7 +28,7 @@ module.exports = class Module {
                 this.services.push(service);
             })
         } catch (error) {
-            log.warn("Can't find any services!")
+            log.error(log.errTypes.Module, "Failed to load services:", error)
         }
     }
 
