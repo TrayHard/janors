@@ -9,7 +9,7 @@
     "dotenv": "^8.2.0",
     "moment": "^2.27.0",
     "mongoose": "^5.10.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "nodemon": "^2.0.4",
     "request": "^2.88.2",
     "request-promise-native": "^1.0.8",
